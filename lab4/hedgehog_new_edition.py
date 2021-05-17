@@ -3,9 +3,9 @@ from pygame.draw import *
 
 pygame.init()
 
-screen = pygame.display.set_mode((700, 900))
-screen.fill((102, 153, 102))
 FPS = 30
+screen = pygame.display.set_mode((400, 400))
+screen.fill((102, 153, 102))
 
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
@@ -23,29 +23,16 @@ spikes_color = SPIKE
 spikes_edging = DARK
 
 
+# Здесь мы будем рисовать
 def main():
-    draw_earth(EARTH, LIGHT, -5, 500, 710, 400)
-    draw_tree(YELLOW, LIGHT, -5, -5, 75, 570)
-    draw_hedgehog(screen, 30, 540, 205, (71, 61, 61))
-    draw_tree(YELLOW, LIGHT, 105, -5, 175, 880)
-    draw_hedgehog(screen, -20, 820, 300, (71, 61, 61))
-    draw_tree(YELLOW, LIGHT, 500, -5, 80, 570)
-    draw_hedgehog(screen, 540, 540, 170, (71, 61, 61))
-    draw_tree(YELLOW, LIGHT, 630, -5, 58, 700)
-    draw_hedgehog(screen, 350, 700, 240, (71, 61, 61))
-
-    draw_red_mroom(screen, 362, 835, 28)
-    draw_red_mroom(screen, 470, 830, 21)
-    draw_red_mroom(screen, 408, 845, 32)
-    draw_red_mroom(screen, 375, 878, 31)
-    draw_red_mroom(screen, 450, 850, 40)
+    draw_hedgehog(screen, 100, 100, 300, (71, 61, 61))
 
 
 def draw_hedgehog(surface, x, y, width, color):
     """
     :param surface: объект pygame.surface
     :param x, y: коордианата левого верхнего угла изображения
-    :param width: ширина и высота изображения
+    :param width, height: ширина и высота изображения
     :param color: цвет ежа
     """
     body_width = width*0.85
@@ -71,7 +58,7 @@ def draw_hedgehog(surface, x, y, width, color):
     draw_leg_3(surface, color, leg_x_3, leg_y_3, leg_size_3)
     draw_leg_4(surface, color, leg_x_4, leg_y_4, leg_size_4)
 
-    spike_left_x = x + body_width*0.65
+    spike_left_x = x + body_width*0.72
     spike_left_y = y + body_height * 0.5
     draw_spikes_left(surface, spike_left_x, spike_left_y, spike_size)
 
@@ -195,7 +182,9 @@ def draw_spikes_left(surface, spike_x, spike_y, spike_size):
                                              (spike_x + spike_size / 2, spike_y + spike_size * 3 ** 0.5 / 2)], 1)
             spike_x += base*3**0.5/2
             spike_y -= base/2
+            x = spike_x
         spike_y = y
+        spike_x = x/1.03
 
 
 def draw_spikes_right(surface, spike_x, spike_y, spike_size):
@@ -210,7 +199,10 @@ def draw_spikes_right(surface, spike_x, spike_y, spike_size):
                                              (spike_x - base * 3 ** 0.5 / 2, spike_y - base / 2),
                                              (spike_x - spike_size / 2, spike_y + spike_size * 3 ** 0.5 / 2)], 1)
             spike_x += base*1.02
+
+            x = spike_x
         spike_y = y
+        spike_x = x/1.03
 
 
 def draw_red_mroom(surface, red_mroom_x, red_mroom_y, red_mroom_size):
@@ -235,16 +227,28 @@ def draw_red_mroom(surface, red_mroom_x, red_mroom_y, red_mroom_size):
     ellipse(surface, LIGHT, [(red_mroom_x, red_mroom_y), (hat_width, hat_height)], 1)
     ellipse(surface, WHITE,
             [(red_mroom_x + hat_width*0.23,  red_mroom_y + hat_height*0.1), (spot_width_1, spot_height_1)])
+    ellipse(surface, LIGHT,
+            [(red_mroom_x + hat_width*0.23,  red_mroom_y + hat_height*0.1),(spot_width_1, spot_height_1)], 1)
     ellipse(surface, WHITE,
             [(red_mroom_x + hat_width*0.15, red_mroom_y + hat_height*0.55), (spot_width_2, spot_height_2)])
+    ellipse(surface, LIGHT,
+            [(red_mroom_x + hat_width*0.15, red_mroom_y + hat_height*0.55),(spot_width_2, spot_height_2)], 1)
     ellipse(surface, WHITE,
             [(red_mroom_x + hat_width*0.8, red_mroom_y + hat_height*0.5),(spot_width_3, spot_height_3)])
+    ellipse(surface, LIGHT,
+            [(red_mroom_x + hat_width*0.8, red_mroom_y + hat_height*0.5),(spot_width_3, spot_height_3)], 1)
     ellipse(surface, WHITE,
             [(red_mroom_x + hat_width*0.35, red_mroom_y + hat_height*0.35), (spot_width_4, spot_height_4)])
+    ellipse(surface, LIGHT,
+            [(red_mroom_x + hat_width*0.35, red_mroom_y + hat_height*0.35),  (spot_width_4, spot_height_4)], 1)
     ellipse(surface, WHITE,
             [(red_mroom_x + hat_width*0.55, red_mroom_y + hat_height*0.2),  (spot_width_5, spot_height_5)])
+    ellipse(surface, LIGHT,
+            [(red_mroom_x + hat_width*0.55, red_mroom_y + hat_height*0.2), (spot_width_5, spot_height_5)], 1)
     ellipse(surface, WHITE,
             [(red_mroom_x + hat_width*0.5,  red_mroom_y + hat_height*0.5), (spot_width_6, spot_height_6)])
+    ellipse(surface, LIGHT,
+            [(red_mroom_x + hat_width*0.5,  red_mroom_y + hat_height*0.5),   (spot_width_6, spot_height_6)], 1)
 
 
 def draw_mroom(surface, mroom_x, mroom_y, mroom_size):
@@ -258,25 +262,6 @@ def draw_mroom(surface, mroom_x, mroom_y, mroom_size):
 def draw_apple(surface, apple_x, apple_y, apple_size ):
     ellipse(surface, RED, [(apple_x, apple_y), (apple_size, apple_size)])
     ellipse(surface, LIGHT, [(apple_x, apple_y), (apple_size, apple_size)], 1)
-
-
-def draw_line(color, pos1, pos2, x, y, width):  # Draws a line
-    line(screen, color, [pos1, pos2], [x, y], width)
-
-
-def draw_tree(color, border, pos1, pos2, x, y,):  # Draws a rectangle
-    rect(screen, color, [pos1, pos2, x, y])
-    rect(screen, border, [pos1, pos2, x, y], 1)   #
-
-
-def draw_earth(color, border, pos1, pos2, x, y, ):  # Draws a rectangle
-    rect(screen, color, [pos1, pos2, x, y])
-    rect(screen, border, [pos1, pos2, x, y], 1)  #
-
-
-def draw_ell(color, border, pos1, pos2, x, y):
-    ellipse(screen, color, [pos1, pos2, x, y])
-    ellipse(screen, border, [pos1, pos2, x, y], 1)
 
 
 main()
