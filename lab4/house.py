@@ -3,6 +3,7 @@ from pygame import *
 
 pygame.init()
 
+<<<<<<< HEAD
 
 def main():
     x, y = 300, 200
@@ -60,3 +61,9 @@ def draw_house_roof(x, y, width, height):
 main()
 
 
+=======
+x, y = 100, 100
+width, height = 200, 200
+
+draw_house(x, y, width, height)
+>>>>>>> 241fa96a0b9a08cc63f22f900dd5a2e6ea878ea3
