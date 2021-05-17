@@ -20,21 +20,24 @@ BODY = (71, 61, 61)
 
 
 def main():
-    # Ground
     draw_rect(EARTH, LIGHT, -5, 500, 710, 400)
-    # Trees
     draw_rect(YELLOW, LIGHT, -5, -5, 75, 570)
+    draw_hedgehog(180, 680, 220)
     draw_rect(YELLOW, LIGHT, 105, -5, 175, 880)
     draw_rect(YELLOW, LIGHT, 500, -5, 80, 570)
+    draw_hedgehog(670, 600, 220)
     draw_rect(YELLOW, LIGHT, 630, -5, 58, 700)
-    draw_hedgehog(360, 710, 220)  # Рисует ежа в точке x, y, шириной width
-    draw_hedgehog(120, 770, 100)
-
+    draw_hedgehog(470, 760, 220)  # Рисует ежа в точке x, y, шириной width
+    draw_hedgehog(100, 860, 220)
+    draw_amanita(540, 840, 1)
+    draw_amanita(470, 850, 1)
+    draw_amanita(410, 830, 1)
+    draw_amanita(340, 840, 1)
 
 def draw_hedgehog(x, y, width_hh):
-    height_hh = width_hh/2
+    height_hh = width_hh/2.2
     width_paw_1 = width_hh/5.5
-    height_paw_1 = width_paw_1* .375
+    height_paw_1 = width_paw_1*0.375
     width_paw_2 = width_hh/11
     height_paw_2 = width_paw_2*0.9
     width_paw_3 = width_hh*0.15
@@ -44,25 +47,26 @@ def draw_hedgehog(x, y, width_hh):
     multiplier = width_hh / 220
     head_width = width_hh*0.318
     head_height = head_width/1.75
-    draw_ell(BODY, LIGHT, x - 8, y + 60,  width_paw_1, height_paw_1)  # Paw
-    draw_ell(BODY, LIGHT, x + 201, y + 65, width_paw_2, height_paw_2)  # Paw
-    draw_ell(BODY, LIGHT, x, y, width_hh, height_hh)  # Body
-    draw_spikes_1(x + 20, y + 50, multiplier)
-    draw_ell(BODY, LIGHT, x + 13, y + 75, width_paw_3, height_paw_3)  # Paw
-    draw_ell(BODY, LIGHT, x + 173, y + 82, width_paw_4, height_paw_4)  # Paw
-    draw_spikes_4(x + 170, y + 30, multiplier)
-    draw_spikes_4(x + 180, y + 70, multiplier)
-    draw_spikes_4(x + 160, y + 70, multiplier)
-    draw_spikes_3(x + 20, y + 30, multiplier)
-    draw_spikes_3(x + 20, y + 50, multiplier)
-    draw_amanita(x + 50, y - 70, multiplier)
-    draw_mroom(x - 5, y - 10, multiplier)
-    draw_apple(x + 124, y - 26, multiplier)
-    draw_spikes_3(x + 15, y + 70, multiplier)
-    draw_mroom(x + 10, y - 18, multiplier)
-    draw_spikes_2(x + 50, y + 40,multiplier)
-    draw_ell(BODY, LIGHT, x + 180, y + 30, head_width, head_height)  # Head
-    draw_eyes_nose(585, 750, multiplier)
+    pos_1 = x - width_hh/2
+    pos_2 = y - height_hh/2
+    draw_ell(BODY, LIGHT, pos_1 - 8, pos_2 + 60,  width_paw_1, height_paw_1)  # Paw
+    draw_ell(BODY, LIGHT, pos_1 + 201, pos_2 + 65, width_paw_2, height_paw_2)  # Paw
+    draw_ell(BODY, LIGHT, pos_1, pos_2, width_hh, height_hh)  # Body
+    draw_spikes_1(pos_1 + 20, pos_2 + 50, multiplier)
+    draw_ell(BODY, LIGHT, pos_1 + 13, pos_2 + 75, width_paw_3, height_paw_3)  # Paw
+    draw_ell(BODY, LIGHT, pos_1 + 173, pos_2 + 82, width_paw_4, height_paw_4)  # Paw
+    draw_spikes_4(pos_1 + 170, pos_2 + 30, multiplier)
+    draw_spikes_4(pos_1 + 180, pos_2 + 70, multiplier)
+    draw_spikes_4(pos_1 + 160, pos_2 + 70, multiplier)
+    draw_spikes_3(pos_1 + 20, pos_2 + 30, multiplier)
+    draw_spikes_3(pos_1 + 20, pos_2 + 50, multiplier)
+    draw_amanita(pos_1 + 50, pos_2 - 70, multiplier)
+    draw_mroom(pos_1 - 5, pos_2 - 10, multiplier)
+    draw_apple(pos_1 + 124, pos_2 - 26, multiplier)
+    draw_spikes_3(pos_1 + 15, pos_2 + 70, multiplier)
+    draw_mroom(pos_1 + 10, pos_2 - 18, multiplier)
+    draw_spikes_2(pos_1 + 50, pos_2 + 40, multiplier)
+    draw_head(pos_1 + 180, pos_2 + 30, head_width, head_height)  # Head
 
 
 def draw_line(color, pos1, pos2, x, y, width):  # Draws a line
@@ -74,18 +78,22 @@ def draw_rect(color, border, pos1, pos2, x, y,):  # Draws a rectangle
     rect(screen, border, [pos1, pos2, x, y], 1)
 
 
-def draw_eyes_nose(x, y,  multiplier):
-    circle(screen, (0, 0, 0), (x, y), 5)
-    circle(screen, LIGHT, (x, y), 5, 1)
-    circle(screen, (0, 0, 0), (x - 15, y + 6), 5)
-    circle(screen, LIGHT, (x - 15, y + 6), 5, 1)
-    circle(screen, (0, 0, 0), (x + 24, y + 8), 4)
-    circle(screen, LIGHT, (x + 24, y + 8), 4, 1)
-
-
 def draw_ell(color, border, pos1, pos2, x, y):
     ellipse(screen, color, [pos1, pos2, x, y])
     ellipse(screen, border, [pos1, pos2, x, y], 1)
+
+
+def draw_head(x, y, w, h):
+    pos_face_x = x + 45
+    pos_face_y = y + 10
+    ellipse(screen, BODY, [x, y, w, h])
+    ellipse(screen, LIGHT, [x, y, w, h], 1)
+    circle(screen, (0, 0, 0), (pos_face_x, pos_face_y), 5)
+    circle(screen, LIGHT, (pos_face_x, pos_face_y), 5, 1)
+    circle(screen, (0, 0, 0), (pos_face_x - 15, pos_face_y + 6), 5)
+    circle(screen, LIGHT, (pos_face_x - 15, pos_face_y + 6), 5, 1)
+    circle(screen, (0, 0, 0), (pos_face_x + 24, pos_face_y + 8), 4)
+    circle(screen, LIGHT, (pos_face_x + 24, pos_face_y + 8), 4, 1)
 
 
 def draw_spikes_1(x, y, spike_multiplier):
